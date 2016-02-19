@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B0F4BA00-1476-460B-88B1-D35E788D3FB2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TwentySixClock</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3937B516220758918EC7106AEEB62664FDA70104</key>
+		<string>https://github.com/basicinc/hackathon2015_div4_b.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TwentySixClock/TwentySixClock.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3937B516220758918EC7106AEEB62664FDA70104</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/basicinc/hackathon2015_div4_b.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3937B516220758918EC7106AEEB62664FDA70104</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3937B516220758918EC7106AEEB62664FDA70104</string>
+			<key>IDESourceControlWCCName</key>
+			<string>hackathon2015_div4_b</string>
+		</dict>
+	</array>
+</dict>
+</plist>
