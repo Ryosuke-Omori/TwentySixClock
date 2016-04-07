@@ -57,7 +57,7 @@ class HomeClockView : UIView {
     
     
     func update() {
-        NSTimer.scheduledTimerWithTimeInterval(1/60, target: self, selector: "nowTime", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(1/60, target: self, selector: #selector(HomeClockView.nowTime), userInfo: nil, repeats: true)
     }
     
     func nowTime(){
@@ -68,7 +68,7 @@ class HomeClockView : UIView {
             [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Weekday],
             fromDate: myDate)
         
-        let weekDayString: Array = ["nil", "月", "火", "水", "木", "金", "土", "日"]
+//        let weekDayString: Array = ["nil", "月", "火", "水", "木", "金", "土", "日"]
         
         let LagTime = NSDate(timeIntervalSinceNow:NSTimeInterval(User.sharedUser.lagCount))
         let dateformatter = NSDateFormatter()

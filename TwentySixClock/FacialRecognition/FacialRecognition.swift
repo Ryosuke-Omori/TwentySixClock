@@ -24,7 +24,7 @@ class FacialRecognition {
     var delegate:FacialRecognitionDelegate?
     var currentRecognized = false
     func faceRecognition(faceImg:UIImage){
-        currentFrames++
+        currentFrames += 1
         if(currentFrames % 15 == 0){
             let ciImage = CIImage(CGImage: faceImg.CGImage!)
             let imageOptions = [CIDetectorImageOrientation:NSNumber(integer: 6)]

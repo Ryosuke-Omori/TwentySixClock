@@ -16,7 +16,7 @@ class HomeClockViewController: UIViewController {
         super.viewDidLoad()
         
         let application = UIApplication.sharedApplication()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setUpslideLockLabel", name: UIApplicationDidBecomeActiveNotification, object: application)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeClockViewController.setUpslideLockLabel), name: UIApplicationDidBecomeActiveNotification, object: application)
         self.setUpslideLockLabel()
     }
 

@@ -63,7 +63,7 @@ class AnalogClockView : UIView, FacialRecognitionDelegate {
     
     func startClock() {
         
-        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "reloadClock", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(AnalogClockView.reloadClock), userInfo: nil, repeats: true)
         
     }
     
@@ -77,7 +77,7 @@ class AnalogClockView : UIView, FacialRecognitionDelegate {
             [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second],
             fromDate: myDate)
         
-        var minute:CGFloat = 60 * CGFloat(myComponents.hour) + CGFloat(myComponents.minute)
+//        var minute:CGFloat = 60 * CGFloat(myComponents.hour) + CGFloat(myComponents.minute)
         let second:CGFloat = (60 * 60 * CGFloat(myComponents.hour)) + (60 * CGFloat(myComponents.minute)) + CGFloat(myComponents.second)
         
         if !isRecognized {

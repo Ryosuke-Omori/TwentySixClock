@@ -37,20 +37,29 @@ class FacialRecognitionView: UIView,AVCaptureVideoDataOutputSampleBufferDelegate
         
     }
     func initCamera(){
-        var error: NSError?
+//        var error: NSError?
 
         session = AVCaptureSession()
         session?.sessionPreset = AVCaptureSessionPresetHigh;
         
         var camera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        var devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+        let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
         for device in devices{
             if(device.position == AVCaptureDevicePosition.Front){
                 camera = device as! AVCaptureDevice
             }
         }
       
-        videoInput = AVCaptureDeviceInput.deviceInputWithDevice(camera) as? AVCaptureDeviceInput
+//        do{
+//            videoInput = AVCaptureDeviceInput.deviceInputWithDevice(camera) as? AVCaptureDeviceInput
+//        } catch let e as NSError{
+//            print("AVCaptureDeviceInputError: \(e)")
+//        }
+        do{
+            videoInput = try AVCaptureDeviceInput(device: camera)
+        } catch let e as NSError {
+            print("AVCaptureDeviceInputError: \(e)")
+        }
         session?.addInput(videoInput)
         
         videoDataOutput = AVCaptureVideoDataOutput()
@@ -59,12 +68,17 @@ class FacialRecognitionView: UIView,AVCaptureVideoDataOutputSampleBufferDelegate
         let queue = dispatch_queue_create("myQueue", nil)
         videoDataOutput?.alwaysDiscardsLateVideoFrames = true;
         videoDataOutput?.setSampleBufferDelegate(self, queue: queue)
-        videoDataOutput?.videoSettings = [kCVPixelBufferPixelFormatTypeKey : NSNumber(integer:kCVPixelFormatType_32BGRA)];
+        videoDataOutput?.videoSettings = [kCVPixelBufferPixelFormatTypeKey : NSNumber(integer:Int(kCVPixelFormatType_32BGRA))];
         
-        if(camera.lockForConfiguration()){
-            camera.activeVideoMinFrameDuration = CMTimeMake(1, 15);
-            camera.unlockForConfiguration()
+//        if(camera.lockForConfiguration()){
+        do {
+            try camera.lockForConfiguration()
+        } catch let e as NSError {
+            print("lockForConfigurationError: \(e)")
         }
+        camera.activeVideoMinFrameDuration = CMTimeMake(1, 15);
+        camera.unlockForConfiguration()
+//        }
         session!.startRunning()
     }
     func captureOutput(captureOutput: AVCaptureOutput, didOutputSampleBuffer sampleBuffer: CMSampleBufferRef, fromConnection connection:AVCaptureConnection) {
@@ -89,12 +103,12 @@ class FacialRecognitionView: UIView,AVCaptureVideoDataOutputSampleBufferDelegate
         let width: Int = CVPixelBufferGetWidth(imageBuffer)
         let height: Int = CVPixelBufferGetHeight(imageBuffer)
         
-        let colorSpace: CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()
+        let colorSpace: CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()!
         
         let bitsPerCompornent: Int = 8
-        var bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue) as UInt32)
-        let newContext: CGContextRef = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompornent, bytesPerRow, colorSpace, bitmapInfo) as CGContextRef
-        let imageRef: CGImageRef = CGBitmapContextCreateImage(newContext)
+        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue) as UInt32)
+        let newContext: CGContextRef = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompornent, bytesPerRow, colorSpace, bitmapInfo.rawValue)! as CGContextRef
+        let imageRef: CGImageRef = CGBitmapContextCreateImage(newContext)!
         
         let resultImage: UIImage? = UIImage(CGImage: imageRef, scale: 1.0, orientation: UIImageOrientation.Right)
         
